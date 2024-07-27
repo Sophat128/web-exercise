@@ -7,12 +7,18 @@ const morgan = require("morgan");
 const articleRoutes = require("./routers/articleRoutes");
 const app = express();
 
+
+const notFoundHandler = (req, res, next) => {
+  res.status(404).send({message: "Not Found"})
+  }
+
 app.use(morgan("common"))
 app.set("view engine", 'ejs')
 app.use(express.json())
 app.use("/assets", express.static("public"))
 app.use("",userRoutes)
 app.use("",articleRoutes)
+app.use(notFoundHandler)
 
 
 
